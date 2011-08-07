@@ -36,8 +36,8 @@ WIFI_EXT_MODULE_PATH := /system/lib/modules/sdio.ko
 WIFI_EXT_MODULE_NAME := sdio
 
 BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_FM_RADIO := true
-BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
+#BOARD_HAVE_FM_RADIO := true
+#BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
@@ -67,6 +67,13 @@ BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_USES_RECOVERY_CHARGEMODE := false
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_LDPI_RECOVERY := true
+BOARD_CUSTOM_RECOVERY_FILES := ../../device/semc/msm7x27-common/recovery/extendedcommands.c \
+				../../device/semc/msm7x27-common/recovery/recovery.c \
+				../../device/semc/msm7x27-common/recovery/roots.c
+
+#install.c needs to be fixed first
+#BOARD_CUSTOM_UPDATER_FILES := ../../../device/semc/msm7x27-common/recovery/install.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/semc/msm7x27-common/recovery/recovery_ui.c
 
 
 BOARD_KERNEL_CMDLINE := console=null

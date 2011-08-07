@@ -26,3 +26,6 @@ echo 30 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/down_differential
 echo 500000 > /sys/devices/system/cpu/cpu0/cpufreq/ondemand/sampling_rate
 echo 245760 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 
+mount -o rw,remount -t yaffs2 /dev/block/mtdblock0 /system
+chmod u+s /system/bin/charger
+mount -o ro,remount -t yaffs2 /dev/block/mtdblock0 /system
