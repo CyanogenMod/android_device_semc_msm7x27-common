@@ -70,9 +70,8 @@ BOARD_LDPI_RECOVERY := true
 BOARD_CUSTOM_RECOVERY_FILES := ../../device/semc/msm7x27-common/recovery/extendedcommands.c \
 				../../device/semc/msm7x27-common/recovery/recovery.c \
 				../../device/semc/msm7x27-common/recovery/roots.c
-
 #install.c needs to be fixed first
-#BOARD_CUSTOM_UPDATER_FILES := ../../../device/semc/msm7x27-common/recovery/install.c
+BOARD_CUSTOM_UPDATER_FILES := ../../../device/semc/msm7x27-common/recovery/install.c
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/semc/msm7x27-common/recovery/recovery_ui.c
 
 

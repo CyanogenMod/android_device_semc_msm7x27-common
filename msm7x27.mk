@@ -138,6 +138,4 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.product.locale.region=US \
     BUILD_UTC_DATE=0
 
-# we have enough storage space to hold precise GC data
-PRODUCT_TAGS += dalvik.gc.type-precise
 

@@ -79,8 +79,11 @@ on boot
     chown system system /dev/seport_btn_det
     chmod 0660 /dev/seport_btn_det
 
+#needed for ril
+    mkdir /data/radio 0777
+
 # needed for sensors HAL:
-    mkdir /etc/sensors 0777 
+    mkdir /etc/sensors 0777
 
 # Use interrupt to detect sd card insertion and removal
     write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.1/polling 0
