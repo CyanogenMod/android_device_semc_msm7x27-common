@@ -1,6 +1,6 @@
 #!/system/xbin/sh
 
-
+/system/bin/charger
 
 	# remount rootfs rw
 	mount -o remount,rw rootfs /
@@ -11,7 +11,7 @@
 	rm logo.rle
 	rm default.prop
 	tar -xf /system/bin/boot.tar
-	# nobodyAtall - Fix 
+  #nobodyAtall - Fix 
 	mkdir -p /cm
 	cd /cm
 	tar -xf /system/bin/boot.tar
@@ -20,7 +20,9 @@
 	umount -l /dev/block/mtdblock0
 	umount -l /dev/block/mtdblock1
 	umount -l /dev/block/mtdblock2
+	umount -l /dev/block/mtdblock3
 	rmdir /system /data /cache /mnt
-	# Mount /system to /cm/system
+  #Mount /system to /cm/system
 	/sbin/mount_system
+	sleep 2
 	chroot /cm /init	

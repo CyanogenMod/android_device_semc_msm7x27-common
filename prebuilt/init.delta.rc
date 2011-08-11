@@ -79,6 +79,21 @@ on boot
     chown system system /dev/seport_btn_det
     chmod 0660 /dev/seport_btn_det
 
+#needed for lights
+    chmod 0777 /sys/devices/virtual/misc/rgb_led/rgb_led/red:brightness
+    chmod 0777 /sys/devices/virtual/misc/rgb_led/rgb_led/green:brightness
+    chmod 0777 /sys/devices/virtual/misc/rgb_led/rgb_led/blue:brightness
+    chmod 0777 /sys/devices/virtual/misc/rgb_led/rgb_led/frequency
+    chmod 0777 /sys/devices/virtual/misc/rgb_led/rgb_led/pwm
+    chmod 0777 /sys/devices/virtual/misc/rgb_led/rgb_led/blink
+    chmod 0777 /sys/devices/virtual/misc/rgb_led/rgb_led/power
+    chmod 0777 /sys/devices/platform/msm_fb/leds/lcd-backlight/brightness
+    chmod 0777 /sys/devices/platform/msm_pmic_flash_led/cmaflash:enable
+    chmod 0777 /sys/devices/platform/msm_pmic_flash_led/spotlight:enable
+    chmod 0777 /sys/devices/platform/i2c-adapter/i2c-0/0-0036/br::intensity
+    chmod 0777 /sys/devices/platform/i2c-adapter/i2c-0/0-0036/mode
+    chmod 0777 /sys/devices/platform/msm_pmic_misc_led.0/brightness
+
 #needed for ril
     mkdir /data/radio 0777
 
@@ -92,14 +107,12 @@ on boot
 # included in the kernel.
 #    insmod /system/lib/modules/sdio.ko
 
-# insert kernel module for mddi fix
-    insmod /system/lib/modules/x8mddi.ko
 
 # Froyo's app2sd kernel modules
-    insmod /system/lib/modules/dm-mod.ko
-    insmod /system/lib/modules/dm-crypt.ko
-    insmod /system/lib/modules/twofish_common.ko
-    insmod /system/lib/modules/twofish.ko
+#    insmod /system/lib/modules/dm-mod.ko
+#    insmod /system/lib/modules/dm-crypt.ko
+#    insmod /system/lib/modules/twofish_common.ko
+#    insmod /system/lib/modules/twofish.ko
 
 service dhcp-service /system/bin/netcfg eth0 dhcp
 	oneshot
@@ -107,14 +120,14 @@ service dhcp-service /system/bin/netcfg eth0 dhcp
 # Enabled port-bridge for 'eng' builds
 service qmuxd /system/bin/qmuxd &
 
-service qcom-sh /system/bin/sh /init.delta.sh
-    user root
-    oneshot
+#service qcom-sh /system/bin/sh /init.delta.sh
+#    user root
+#    oneshot
 
 # Copy calibration data from NV to kernel drivers
-service nvimport /system/bin/nvimport
-    user root
-    oneshot
+#service nvimport /system/bin/nvimport
+#    user root
+#    oneshot
 
 service hciattach /system/bin/hciattach -n /dev/ttyHS0 texas_new 3000000
     user root
@@ -172,3 +185,13 @@ on early-init
     device /dev/akm8975_dev 0660 compass system
 
 
+# Needed for touch support
+service inputattach /system/bin/inputattach -cypress /dev/ttyHS1
+
+# Needed for slidercounter
+service slidercounter /system/bin/slidercounter mimmi_keypad
+
+# Check touch FW
+service ts_fw_update /system/bin/sh /system/etc/ts_fw_update.sh
+    user root
+    oneshot

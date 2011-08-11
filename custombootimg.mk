@@ -8,6 +8,7 @@ $(INSTALLED_BOOTIMAGE_TARGET): $(TARGET_PREBUILT_KERNEL) $(recovery_ramdisk) $(I
 	$(hide) cp -r $(PRODUCT_OUT)/recovery/root/sbin/* $(PRODUCT_OUT)/combinedroot/sbin/
 	$(hide) cp device/semc/msm7x27-common/prebuilt/init $(PRODUCT_OUT)/combinedroot/
 	$(hide) cp device/semc/msm7x27-common/prebuilt/init.rc $(PRODUCT_OUT)/combinedroot/
+	$(hide) chmod 777 $(PRODUCT_OUT)/combinedroot/init.rc
 	$(hide) $(MKBOOTFS) $(PRODUCT_OUT)/combinedroot/ > $(PRODUCT_OUT)/combinedroot.cpio
 	$(hide) cat $(PRODUCT_OUT)/combinedroot.cpio | $(MINIGZIP) > $(PRODUCT_OUT)/combinedroot.fs
 	$(hide) $(MKBOOTIMG) --kernel $(TARGET_PREBUILT_KERNEL) --ramdisk $(PRODUCT_OUT)/combinedroot.fs --base $(BOARD_KERNEL_BASE) --output $@

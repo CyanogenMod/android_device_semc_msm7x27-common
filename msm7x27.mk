@@ -13,15 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+
+# These is the hardware-common overlay, which points to the location
+# of hardware-specific resource overrides, typically the frameworks and
+# application settings that are stored in resourced.
+DEVICE_PACKAGE_OVERLAYS += device/semc/msm7x27-common/overlay
+
+
 PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/msm7x27-common/prelink-linux-arm-x8.map
 
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/init.delta.rc:root/init.delta.rc \
     device/semc/msm7x27-common/prebuilt/ueventd.delta.rc:root/ueventd.delta.rc \
+    device/semc/msm7x27-common/prebuilt/init.delta.rc:root/init.delta.rc \
     device/semc/msm7x27-common/recovery.fstab:root/recovery.fstab \
     device/semc/msm7x27-common/prebuilt/vold.fstab:system/etc/vold.fstab \
-    device/semc/msm7x27-common/prebuilt/hw_config.sh:system/etc/hw_config.sh \
-    device/semc/msm7x27-common/prebuilt/initlogo.rle:root/initlogo.rle 
+    device/semc/msm7x27-common/prebuilt/hw_config.sh:system/etc/hw_config.sh 
 
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -66,7 +72,8 @@ PRODUCT_COPY_FILES += \
 
 #Kernel modules
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/modules/x8mddi.ko:system/lib/modules/x8mddi.ko \
+    device/semc/msm7x27-common/modules/sdio.ko:system/lib/modules/sdio.ko \
+    device/semc/msm7x27-common/modules/tiwlan_drv.ko:system/lib/modules/tiwlan_drv.ko \
     device/semc/msm7x27-common/modules/dm-mod.ko:system/lib/modules/dm-mod.ko \
     device/semc/msm7x27-common/modules/dm-crypt.ko:system/lib/modules/dm-crypt.ko \
     device/semc/msm7x27-common/modules/twofish.ko:system/lib/modules/twofish.ko \
@@ -80,16 +87,6 @@ PRODUCT_COPY_FILES += \
     device/semc/msm7x27-common/prebuilt/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
     device/semc/msm7x27-common/prebuilt/AudioFilter.csv:system/etc/AudioFilter.csv
 
-#new charging animations
-PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/animations/anim1.rle:system/etc/semc/chargemon/anim1.rle \
-    device/semc/msm7x27-common/prebuilt/animations/anim2.rle:system/etc/semc/chargemon/anim2.rle \
-    device/semc/msm7x27-common/prebuilt/animations/anim3.rle:system/etc/semc/chargemon/anim3.rle \
-    device/semc/msm7x27-common/prebuilt/animations/anim4.rle:system/etc/semc/chargemon/anim4.rle \
-    device/semc/msm7x27-common/prebuilt/animations/anim5.rle:system/etc/semc/chargemon/anim5.rle \
-    device/semc/msm7x27-common/prebuilt/animations/anim6.rle:system/etc/semc/chargemon/anim6.rle \
-    device/semc/msm7x27-common/prebuilt/animations/anim7.rle:system/etc/semc/chargemon/anim7.rle \
-    device/semc/msm7x27-common/prebuilt/animations/anim8.rle:system/etc/semc/chargemon/anim8.rle 
 
 #xrecovery
 PRODUCT_COPY_FILES += \
@@ -104,7 +101,6 @@ PRODUCT_PACKAGES += \
     gralloc.delta \
     copybit.delta \
     gps.delta \
-    lights.delta \
     libOmxCore \
     libmm-omxcore \
     com.android.future.usb.accessory

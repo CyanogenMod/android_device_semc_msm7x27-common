@@ -29,3 +29,8 @@ echo 245760 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
 mount -o rw,remount -t yaffs2 /dev/block/mtdblock0 /system
 chmod u+s /system/bin/charger
 mount -o ro,remount -t yaffs2 /dev/block/mtdblock0 /system
+
+# Keyboard LED configuration
+echo 3 > /sys/devices/platform/msm_pmic_misc_led.0/als::cut-off   # would be active only in ligh zone "0"
+echo user_als > /sys/devices/platform/msm_pmic_misc_led.0/control::mode  # user, als, user_als
+echo 40 > /sys/devices/platform/msm_pmic_misc_led.0/max::current_ma  #  0, 10, 20 .. 150 mA
