@@ -109,10 +109,10 @@ on boot
 
 
 # Froyo's app2sd kernel modules
-#    insmod /system/lib/modules/dm-mod.ko
-#    insmod /system/lib/modules/dm-crypt.ko
-#    insmod /system/lib/modules/twofish_common.ko
-#    insmod /system/lib/modules/twofish.ko
+    insmod /system/lib/modules/dm-mod.ko
+    insmod /system/lib/modules/dm-crypt.ko
+    insmod /system/lib/modules/twofish_common.ko
+    insmod /system/lib/modules/twofish.ko
 
 service dhcp-service /system/bin/netcfg eth0 dhcp
 	oneshot
@@ -166,7 +166,7 @@ service ifcfg_up /system/bin/ifconfig tiwlan0 up
     disabled
     oneshot
 
-service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf -dd
+service wpa_supplicant /system/bin/wpa_supplicant -Dtiwlan0 -itiwlan0 -c/data/misc/wifi/wpa_supplicant.conf
     socket wpa_tiwlan0 dgram 660 wifi wifi
     disabled
     oneshot
@@ -194,4 +194,12 @@ service slidercounter /system/bin/slidercounter mimmi_keypad
 # Check touch FW
 service ts_fw_update /system/bin/sh /system/etc/ts_fw_update.sh
     user root
+    oneshot
+
+service wlan_ap_loader /system/bin/tiap_loader.sh
+    disabled
+    oneshot
+
+service hostapd /system/bin/hostap /data/misc/wifi/hostapd.conf
+    disabled
     oneshot

@@ -1286,7 +1286,8 @@ status_t AudioHardware::doRouting(AudioStreamInMSM72xx *input)
                 new_post_proc_feature_mask = (ADRC_ENABLE | EQ_ENABLE | RX_IIR_ENABLE | MBADRC_ENABLE);
             } else {
                 LOGI("Routing audio to No microphone Wired Headset (%d,%x)\n", mMode, outputDevices);
-                new_snd_device = SND_DEVICE_NO_MIC_HEADSET;
+                new_snd_device = SND_DEVICE_HEADSET;
+                new_post_proc_feature_mask = (ADRC_ENABLE | EQ_ENABLE | RX_IIR_ENABLE | MBADRC_ENABLE);
             }
 #endif
         } else if (outputDevices & AudioSystem::DEVICE_OUT_WIRED_HEADSET) {

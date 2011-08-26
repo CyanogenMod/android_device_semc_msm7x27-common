@@ -1621,7 +1621,7 @@ bool QualcommCameraHardware::initPreview()
     mPreviewFrameSize = previewWidth * previewHeight * 3/2;
     dstOffset = 0;
     mPreviewHeap = new PmemPool("/dev/pmem_adsp",
-                                MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+                                MemoryHeapBase::READ_ONLY,
                                 mCameraControlFd,
                                 MSM_PMEM_PREVIEW, //MSM_PMEM_OUTPUT2,
                                 mPreviewFrameSize,
@@ -1709,9 +1709,8 @@ bool QualcommCameraHardware::initRawSnapshot()
         LOGE("initRawSnapshot X: failed to set dimension");
         return false;
     }
-    int rawSnapshotSize = mDimension.raw_picture_height *
+   int rawSnapshotSize = mDimension.raw_picture_height *
                            mDimension.raw_picture_width;
-
     LOGV("raw_snapshot_buffer_size = %d, raw_picture_height = %d, "\
          "raw_picture_width = %d",
           rawSnapshotSize, mDimension.raw_picture_height,
@@ -1723,8 +1722,8 @@ bool QualcommCameraHardware::initRawSnapshot()
     }
 
     //Pmem based pool for Camera Driver
-    mRawSnapShotPmemHeap = new PmemPool("/dev/pmem",
-                                    MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+    mRawSnapShotPmemHeap = new PmemPool("/dev/pmem_adsp",
+                                    MemoryHeapBase::READ_ONLY,
                                     mCameraControlFd,
                                     MSM_PMEM_RAW_MAINIMG,
                                     rawSnapshotSize,
@@ -1798,19 +1797,20 @@ bool QualcommCameraHardware::initRaw(bool initJpegHeap)
 
     // Snapshot
     mRawSize = rawWidth * rawHeight * 3 / 2;
+//   mRawSize = mDimension.raw_picture_height * mDimension.raw_picture_width;
 
-    if( mCurrentTarget == TARGET_MSM7627 )
-             mJpegMaxSize = CEILING16(rawWidth) * CEILING16(rawHeight) * 3 / 2;
-    else
+//    if( mCurrentTarget == TARGET_MSM7627 )
+//             mJpegMaxSize = CEILING16(rawWidth) * CEILING16(rawHeight) * 3 / 2;
+//    else
              mJpegMaxSize = rawWidth * rawHeight * 3 / 2;
 
     LOGV("initRaw: initializing mRawHeap.");
     mRawHeap =
-        new PmemPool("/dev/pmem",
-                     MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+        new PmemPool("/dev/pmem_adsp",
+                     MemoryHeapBase::READ_ONLY,
                      mCameraControlFd,
                      MSM_PMEM_MAINIMG,
-                     mJpegMaxSize,
+                     mRawSize,
                      kRawBufferCount,
                      mRawSize,
                      "snapshot camera");
@@ -1846,7 +1846,7 @@ bool QualcommCameraHardware::initRaw(bool initJpegHeap)
 
         mThumbnailHeap =
             new PmemPool("/dev/pmem_adsp",
-                         MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+                         MemoryHeapBase::READ_ONLY,
                          mCameraControlFd,
                          MSM_PMEM_THUMBNAIL,
                          thumbnailBufferSize,
@@ -2723,7 +2723,7 @@ bool QualcommCameraHardware::initRecord()
         pmem_region = "/dev/pmem_adsp";
 
     mRecordHeap = new PmemPool(pmem_region,
-                               MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+                               MemoryHeapBase::READ_ONLY,
                                 mCameraControlFd,
                                 MSM_PMEM_VIDEO,
                                 mRecordFrameSize,

@@ -17,7 +17,6 @@
 # These is the hardware-common overlay, which points to the location
 # of hardware-specific resource overrides, typically the frameworks and
 # application settings that are stored in resourced.
-DEVICE_PACKAGE_OVERLAYS += device/semc/msm7x27-common/overlay
 
 
 PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/msm7x27-common/prelink-linux-arm-x8.map
@@ -72,21 +71,30 @@ PRODUCT_COPY_FILES += \
 
 #Kernel modules
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/modules/sdio.ko:system/lib/modules/sdio.ko \
-    device/semc/msm7x27-common/modules/tiwlan_drv.ko:system/lib/modules/tiwlan_drv.ko \
     device/semc/msm7x27-common/modules/dm-mod.ko:system/lib/modules/dm-mod.ko \
     device/semc/msm7x27-common/modules/dm-crypt.ko:system/lib/modules/dm-crypt.ko \
     device/semc/msm7x27-common/modules/twofish.ko:system/lib/modules/twofish.ko \
     device/semc/msm7x27-common/modules/twofish_common.ko:system/lib/modules/twofish_common.ko 
+
+
+#HOTSPOT
+PRODUCT_COPY_FILES += \
+    device/semc/msm7x27-common/modules/sdio.ko:system/lib/modules/sdio.ko \
+    device/semc/msm7x27-common/modules/tiwlan_drv.ko:system/lib/modules/tiwlan_drv.ko \
+    device/semc/msm7x27-common/modules/tiap_drv.ko:system/lib/modules/tiap_drv.ko \
+    device/semc/msm7x27-common/prebuilt/tiap_loader.sh:system/bin/tiap_loader.sh \
+    device/semc/msm7x27-common/prebuilt/10dnsconf:system/etc/init.d/10dnsconf \
+    device/semc/msm7x27-common/prebuilt/10hostapconf:system/etc/init.d/10hostapconf \
+    device/semc/msm7x27-common/prebuilt/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
+    device/semc/msm7x27-common/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf 
+
 
 #crappy headset
 PRODUCT_COPY_FILES += \
     device/semc/msm7x27-common/prebuilt/SystemConnector.apk:system/app/SystemConnector.apk 
 
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt \
-    device/semc/msm7x27-common/prebuilt/AudioFilter.csv:system/etc/AudioFilter.csv
-
+    device/semc/msm7x27-common/prebuilt/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt 
 
 #xrecovery
 PRODUCT_COPY_FILES += \
@@ -132,6 +140,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.compcache.default=0 \
     ro.product.locale.language=en \
     ro.product.locale.region=US \
+    wifi.hotspot.ti=1 \
     BUILD_UTC_DATE=0
 
 

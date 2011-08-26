@@ -598,7 +598,6 @@ struct SensorType {
 
 static SensorType sensorTypes[] = {
         { "5mp", 2608, 1960, true,  2592, 1944,0x00000fff },
-        { "5mp", 5184, 1944, false,  2592, 1944,0x00000fff },
         { "3mp", 2064, 1544, false, 2048, 1536,0x000007ff },
         { "2mp", 3200, 1200, false, 1600, 1200,0x000007ff } };
 
@@ -1454,17 +1453,17 @@ static bool native_get_picture (int camfd, common_crop_t *crop)
         return false;
     }
 
-    LOGV("crop: in1_w %d", crop->in1_w);
-    LOGV("crop: in1_h %d", crop->in1_h);
-    LOGV("crop: out1_w %d", crop->out1_w);
-    LOGV("crop: out1_h %d", crop->out1_h);
+    LOGI("crop: in1_w %d", crop->in1_w);
+    LOGI("crop: in1_h %d", crop->in1_h);
+    LOGI("crop: out1_w %d", crop->out1_w);
+    LOGI("crop: out1_h %d", crop->out1_h);
 
-    LOGV("crop: in2_w %d", crop->in2_w);
-    LOGV("crop: in2_h %d", crop->in2_h);
-    LOGV("crop: out2_w %d", crop->out2_w);
-    LOGV("crop: out2_h %d", crop->out2_h);
+    LOGI("crop: in2_w %d", crop->in2_w);
+    LOGI("crop: in2_h %d", crop->in2_h);
+    LOGI("crop: out2_w %d", crop->out2_w);
+    LOGI("crop: out2_h %d", crop->out2_h);
 
-    LOGV("crop: update %d", crop->update_flag);
+    LOGI("crop: update %d", crop->update_flag);
 
     return true;
 }
@@ -2156,7 +2155,7 @@ bool QualcommCameraHardware::initPreview()
     mPreviewFrameSize = previewWidth * previewHeight * 3/2;
     dstOffset = 0;
     mPreviewHeap = new PmemPool("/dev/pmem_adsp",
-                                MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+                                MemoryHeapBase::READ_ONLY,
                                 mCameraControlFd,
                                 MSM_PMEM_PREVIEW, //MSM_PMEM_OUTPUT2,
                                 mPreviewFrameSize,
@@ -2176,7 +2175,7 @@ bool QualcommCameraHardware::initPreview()
 	    /* mPostViewHeap should be declared only for 7630 target */
 	    mPostViewHeap =
 		new PmemPool("/dev/pmem_adsp",
-			MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+			MemoryHeapBase::READ_ONLY,
 			mCameraControlFd,
 			MSM_PMEM_PREVIEW, //MSM_PMEM_OUTPUT2,
 			mPreviewFrameSize,
@@ -2287,10 +2286,10 @@ bool QualcommCameraHardware::initRawSnapshot()
         LOGV("initRawSnapshot: clearing old mRawSnapShotPmemHeap.");
         mRawSnapShotPmemHeap.clear();
     }
-
+//pmem
     //Pmem based pool for Camera Driver
-    mRawSnapShotPmemHeap = new PmemPool("/dev/pmem",
-                                    MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+    mRawSnapShotPmemHeap = new PmemPool("/dev/pmem_adsp",
+                                    MemoryHeapBase::READ_ONLY,
                                     mCameraControlFd,
                                     MSM_PMEM_RAW_MAINIMG,
                                     rawSnapshotSize,
@@ -2371,12 +2370,13 @@ bool QualcommCameraHardware::initRaw(bool initJpegHeap)
              mJpegMaxSize = rawWidth * rawHeight * 3 / 2;
 
     LOGV("initRaw: initializing mRawHeap.");
+//pmem
     mRawHeap =
-        new PmemPool("/dev/pmem",
-                     MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+        new PmemPool("/dev/pmem_adsp",
+                     MemoryHeapBase::READ_ONLY,
                      mCameraControlFd,
                      MSM_PMEM_MAINIMG,
-                     mJpegMaxSize,
+                     mRawSize,
                      kRawBufferCount,
                      mRawSize,
                      "snapshot camera");
@@ -2412,7 +2412,7 @@ bool QualcommCameraHardware::initRaw(bool initJpegHeap)
 
         mThumbnailHeap =
             new PmemPool("/dev/pmem_adsp",
-                         MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+                         MemoryHeapBase::READ_ONLY,
                          mCameraControlFd,
                          MSM_PMEM_THUMBNAIL,
                          thumbnailBufferSize,
@@ -3350,7 +3350,7 @@ bool QualcommCameraHardware::initRecord()
         pmem_region = "/dev/pmem_adsp";
 
     mRecordHeap = new PmemPool(pmem_region,
-                               MemoryHeapBase::READ_ONLY | MemoryHeapBase::NO_CACHING,
+                               MemoryHeapBase::READ_ONLY,
                                 mCameraControlFd,
                                 MSM_PMEM_VIDEO,
                                 mRecordFrameSize,
