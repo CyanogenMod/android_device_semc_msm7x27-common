@@ -74,7 +74,9 @@ PRODUCT_COPY_FILES += \
     device/semc/msm7x27-common/modules/dm-mod.ko:system/lib/modules/dm-mod.ko \
     device/semc/msm7x27-common/modules/dm-crypt.ko:system/lib/modules/dm-crypt.ko \
     device/semc/msm7x27-common/modules/twofish.ko:system/lib/modules/twofish.ko \
-    device/semc/msm7x27-common/modules/twofish_common.ko:system/lib/modules/twofish_common.ko 
+    device/semc/msm7x27-common/modules/twofish_common.ko:system/lib/modules/twofish_common.ko \
+    device/semc/msm7x27-common/modules/mddi.ko:system/lib/modules/mddi.ko \
+    device/semc/msm7x27-common/prebuilt/04modules:system/etc/init.d/04modules
 
 
 #HOTSPOT
@@ -86,8 +88,25 @@ PRODUCT_COPY_FILES += \
     device/semc/msm7x27-common/prebuilt/10dnsconf:system/etc/init.d/10dnsconf \
     device/semc/msm7x27-common/prebuilt/10hostapconf:system/etc/init.d/10hostapconf \
     device/semc/msm7x27-common/prebuilt/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
-    device/semc/msm7x27-common/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf 
+    device/semc/msm7x27-common/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
+    device/semc/msm7x27-common/prebuilt/tiwlan_firmware.bin:system/etc/wifi/tiwlan_firmware.bin \
+    device/semc/msm7x27-common/prebuilt/tiwlan_firmware_ap.bin:system/etc/wifi/softap/tiwlan_firmware_ap.bin 
 
+#netfilter
+#PRODUCT_COPY_FILES += \
+#    device/semc/msm7x27-common/modules/netfilter/ax8netfilter.ko:system/lib/modules/netfilter/ax8netfilter.ko \
+#    device/semc/msm7x27-common/modules/netfilter/x_tables.ko:system/lib/modules/netfilter/x_tables.ko \
+#    device/semc/msm7x27-common/modules/netfilter/ip_tables.ko:system/lib/modules/netfilter/ip_tables.ko \
+#    device/semc/msm7x27-common/modules/netfilter/iptable_filter.ko:system/lib/modules/netfilter/iptable_filter.ko \
+#    device/semc/msm7x27-common/modules/netfilter/nf_conntrack.ko:system/lib/modules/netfilter/nf_conntrack.ko \
+#    device/semc/msm7x27-common/modules/netfilter/xt_multiport.ko:system/lib/modules/netfilter/xt_multiport.ko \
+#    device/semc/msm7x27-common/modules/netfilter/xt_state.ko:system/lib/modules/netfilter/xt_state.ko \
+#    device/semc/msm7x27-common/modules/netfilter/nf_defrag_ipv4.ko:system/lib/modules/netfilter/nf_defrag_ipv4.ko \
+#    device/semc/msm7x27-common/modules/netfilter/nf_conntrack_ipv4.ko:system/lib/modules/netfilter/nf_conntrack_ipv4.ko \
+#    device/semc/msm7x27-common/modules/netfilter/nf_nat.ko:system/lib/modules/netfilter/nf_nat.ko \
+#    device/semc/msm7x27-common/modules/netfilter/iptable_nat.ko:system/lib/modules/netfilter/iptable_nat.ko \
+#    device/semc/msm7x27-common/modules/netfilter/ipt_MASQUERADE.ko:system/lib/modules/netfilter/ipt_MASQUERADE.ko \
+#    device/semc/msm7x27-common/modules/netfilter/iptables:system/bin/iptables
 
 #crappy headset
 PRODUCT_COPY_FILES += \
@@ -126,7 +145,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=false \
     wifi.interface=tiwlan0 \
     wifi.supplicant_scan_interval=15 \
-    ro.sf.hwrotation=180 \
     keyguard.no_require_sim=true \
     ro.com.google.locationfeatures=1 \
     dalvik.vm.dexopt-flags=m=y \

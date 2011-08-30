@@ -103,31 +103,18 @@ on boot
 # Use interrupt to detect sd card insertion and removal
     write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.1/polling 0
 
-# insert SDIO-driver used by wifi. This is _not_ the default SDIO driver
-# included in the kernel.
-#    insmod /system/lib/modules/sdio.ko
-
-
 # Froyo's app2sd kernel modules
     insmod /system/lib/modules/dm-mod.ko
     insmod /system/lib/modules/dm-crypt.ko
     insmod /system/lib/modules/twofish_common.ko
     insmod /system/lib/modules/twofish.ko
+    insmod /system/lib/modules/x8mddi.ko
 
 service dhcp-service /system/bin/netcfg eth0 dhcp
 	oneshot
 
 # Enabled port-bridge for 'eng' builds
 service qmuxd /system/bin/qmuxd &
-
-#service qcom-sh /system/bin/sh /init.delta.sh
-#    user root
-#    oneshot
-
-# Copy calibration data from NV to kernel drivers
-#service nvimport /system/bin/nvimport
-#    user root
-#    oneshot
 
 service hciattach /system/bin/hciattach -n /dev/ttyHS0 texas_new 3000000
     user root

@@ -1,7 +1,5 @@
 #!/system/xbin/sh
 
-/system/bin/charger
-
 	# remount rootfs rw
 	mount -o remount,rw rootfs /
 	chmod 0777 /dev -R
