@@ -89,6 +89,8 @@ PRODUCT_COPY_FILES += \
     device/semc/msm7x27-common/prebuilt/10hostapconf:system/etc/init.d/10hostapconf \
     device/semc/msm7x27-common/prebuilt/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
     device/semc/msm7x27-common/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
+    device/semc/msm7x27-common/prebuilt/tiwlan.ini:system/etc/wifi/tiwlan.ini \
+    device/semc/msm7x27-common/prebuilt/tiwlan_ap.ini:system/etc/wifi/softap/tiwlan_ap.ini \
     device/semc/msm7x27-common/prebuilt/tiwlan_firmware.bin:system/etc/wifi/tiwlan_firmware.bin \
     device/semc/msm7x27-common/prebuilt/tiwlan_firmware_ap.bin:system/etc/wifi/softap/tiwlan_firmware_ap.bin 
 

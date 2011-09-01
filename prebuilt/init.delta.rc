@@ -26,10 +26,6 @@ on early-init
     chown radio system /dev/oncrpc/3000000e:00040000
     chown radio system /dev/oncrpc/30000012:00010000
 
-on property:dev.bootcomplete=1
-	stop dhcp-service
-	start dhcp-service
-
 on property:init.svc.bluetoothd=running
     write /sys/devices/virtual/bluetooth/hci0/link_supervision_timeout 6400
     write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
@@ -102,16 +98,6 @@ on boot
 
 # Use interrupt to detect sd card insertion and removal
     write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.1/polling 0
-
-# Froyo's app2sd kernel modules
-    insmod /system/lib/modules/dm-mod.ko
-    insmod /system/lib/modules/dm-crypt.ko
-    insmod /system/lib/modules/twofish_common.ko
-    insmod /system/lib/modules/twofish.ko
-    insmod /system/lib/modules/x8mddi.ko
-
-service dhcp-service /system/bin/netcfg eth0 dhcp
-	oneshot
 
 # Enabled port-bridge for 'eng' builds
 service qmuxd /system/bin/qmuxd &
