@@ -96,6 +96,10 @@ on boot
 # needed for sensors HAL:
     mkdir /etc/sensors 0777
 
+# nvimport FIX
+    mkdir /data/etc/ 0775
+    mkdir /data/etc/wifi 0775
+
 # Use interrupt to detect sd card insertion and removal
     write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.1/polling 0
 
@@ -175,4 +179,9 @@ service wlan_ap_loader /system/bin/tiap_loader.sh
 
 service hostapd /system/bin/hostap /data/misc/wifi/hostapd.conf
     disabled
+    oneshot
+
+# Copy calibration data from NV to kernel drivers
+service nvimport /system/bin/nvimport
+    user root
     oneshot

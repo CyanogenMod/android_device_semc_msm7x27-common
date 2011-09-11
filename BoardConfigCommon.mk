@@ -45,7 +45,7 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := delta
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
 BOARD_EGL_CFG := device/semc/msm7x27-common/prebuilt/egl.cfg
-BOARD_NO_RGBX_8888 := true
+#BOARD_NO_RGBX_8888 := true
 TARGET_USES_16BPPSURFACE_FOR_OPAQUE := true
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
 
@@ -63,11 +63,6 @@ BOARD_USES_RECOVERY_CHARGEMODE := false
 BOARD_LDPI_RECOVERY := true
 BOARD_HAS_JANKY_BACKBUFFER := true
 BOARD_UMS_LUNFILE := /sys/devices/platform/msm_hsusb/gadget/lun0/file
-BOARD_CUSTOM_RECOVERY_FILES := ../../device/semc/msm7x27-common/recovery/extendedcommands.c \
-				../../device/semc/msm7x27-common/recovery/recovery.c \
-				../../device/semc/msm7x27-common/recovery/roots.c
-#install.c needs to be fixed first
-BOARD_CUSTOM_UPDATER_FILES := ../../../device/semc/msm7x27-common/recovery/install.c
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/semc/msm7x27-common/recovery/recovery_ui.c
 
 
