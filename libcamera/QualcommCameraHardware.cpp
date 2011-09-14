@@ -182,10 +182,10 @@ typedef struct {
 } thumbnail_size_type;
 
 static thumbnail_size_type thumbnail_sizes[] = {
-//    { 6826, 480, 288 }, //1.666667
-//    { 6144, 432, 288 }, //1.5
+    { 6826, 480, 288 }, //1.666667
+    { 6144, 432, 288 }, //1.5
     { 5461, 512, 384 }, //1.333333
-//    { 5006, 352, 288 }, //1.222222
+    { 5006, 352, 288 }, //1.222222
 };
 #define THUMBNAIL_SIZE_COUNT (sizeof(thumbnail_sizes)/sizeof(thumbnail_size_type))
 #define DEFAULT_THUMBNAIL_SETTING 2
