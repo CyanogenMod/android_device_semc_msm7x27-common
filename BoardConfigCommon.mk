@@ -77,4 +77,6 @@ TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/msm7x27-common/releaset
 # Vibrator
 BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/semc/msm7x27-common/vibrator.c
 
+TARGET_HAS_ANCIENT_MSMCAMERA := true
+
 WITH_DEXPREOPT := true

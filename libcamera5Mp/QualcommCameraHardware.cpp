@@ -174,8 +174,9 @@ union zoomimage
 static const camera_size_type preview_sizes[] = {
     { 640, 480 }, // VGA
     { 480, 320 }, // HVGA
+    { 352, 288 }, // CIF
     { 320, 240 }, // QVGA
-    { 176, 144 } // HQVGA
+    { 176, 144 }  // QCIF
 
 
 };
@@ -597,7 +598,8 @@ struct SensorType {
 };
 
 static SensorType sensorTypes[] = {
-        { "5mp", 2608, 1960, true,  2592, 1944,0x00000fff },
+//        { "5mp", 2608, 1960, true,  2592, 1944,0x00000fff },
+        { "5mp",  2216, 1536, true, 2592, 1944,0x000007ff },
         { "3mp", 2064, 1544, false, 2048, 1536,0x000007ff },
         { "2mp", 3200, 1200, false, 1600, 1200,0x000007ff } };
 
@@ -2288,7 +2290,7 @@ bool QualcommCameraHardware::initRawSnapshot()
     }
 //pmem
     //Pmem based pool for Camera Driver
-    mRawSnapShotPmemHeap = new PmemPool("/dev/pmem_adsp",
+    mRawSnapShotPmemHeap = new PmemPool("/dev/pmem",
                                     MemoryHeapBase::READ_ONLY,
                                     mCameraControlFd,
                                     MSM_PMEM_RAW_MAINIMG,

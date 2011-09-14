@@ -69,18 +69,18 @@ struct board_property{
 #define FALSE 0
 
 #define CAMERA_MIN_CONTRAST 0
-#define CAMERA_MAX_CONTRAST 4
+#define CAMERA_MAX_CONTRAST 0
 #define CAMERA_MIN_SHARPNESS 0
 #define CAMERA_MIN_EXPOSURE_COMPENSATION 0
-#define CAMERA_MAX_SHARPNESS 4
+#define CAMERA_MAX_SHARPNESS 0
 #define CAMERA_MIN_SATURATION 0
-#define CAMERA_MAX_SATURATION 4
-#define CAMERA_MAX_EXPOSURE_COMPENSATION 8
-#define CAMERA_DEF_SHARPNESS 2
-#define CAMERA_DEF_CONTRAST 3
-#define CAMERA_DEF_SATURATION 2
-#define CAMERA_DEF_EXPOSURE_COMPENSATION "2.0"
-#define CAMERA_EXPOSURE_COMPENSATION_STEP 2
+#define CAMERA_MAX_SATURATION 0
+#define CAMERA_MAX_EXPOSURE_COMPENSATION 0
+#define CAMERA_DEF_SHARPNESS 0
+#define CAMERA_DEF_CONTRAST 0
+#define CAMERA_DEF_SATURATION 0
+#define CAMERA_DEF_EXPOSURE_COMPENSATION "0"
+#define CAMERA_EXPOSURE_COMPENSATION_STEP 0
 
 #define CEILING16(x) (x&0xfffffff0)
 #define PAD_TO_WORD(x) ((x&1) ? x+1 : x)
@@ -117,8 +117,10 @@ typedef struct {
 	unsigned short orig_picture_dy;
 	unsigned short ui_thumbnail_height;
 	unsigned short ui_thumbnail_width;
-	unsigned short thumbnail_width;
+	unsigned short filler2;
+	unsigned short filler1;
 	unsigned short thumbnail_height;
+	unsigned short thumbnail_width;
 	unsigned short raw_picture_height;
 	unsigned short raw_picture_width;
 	unsigned short filler7;

@@ -147,6 +147,7 @@ static const camera_size_type preview_sizes[] = {
     { 640, 480 }, // VGA
     { 480, 320 }, // HVGA
     { 384, 288 },
+    { 352, 288 }, // CIF
     { 320, 240 }, // QVGA
     { 176, 144 }, // QCIF
 };
@@ -281,15 +282,15 @@ struct SensorType {
 };
 
 static SensorType sensorTypes[] = {
-        { "3mp", 2216, 1536, true, 2048, 1536,0x000007ff },
+        { "dlt002_camera", 2224, 1536, true, 2048, 1536 ,0x000007ff },
         { "2mp", 3200, 1200, false, 1600, 1200,0x000007ff } };
 
 
 static SensorType * sensorType;
 
 static const str_map picture_formats[] = {
-        {CameraParameters::PIXEL_FORMAT_JPEG, PICTURE_FORMAT_JPEG}
-        //,{CameraParameters::PIXEL_FORMAT_RAW, PICTURE_FORMAT_RAW}
+        {CameraParameters::PIXEL_FORMAT_JPEG, PICTURE_FORMAT_JPEG},
+        {CameraParameters::PIXEL_FORMAT_RAW, PICTURE_FORMAT_RAW}
 };
 
 static bool parameter_string_initialized = false;
@@ -1722,7 +1723,7 @@ bool QualcommCameraHardware::initRawSnapshot()
     }
 
     //Pmem based pool for Camera Driver
-    mRawSnapShotPmemHeap = new PmemPool("/dev/pmem_adsp",
+    mRawSnapShotPmemHeap = new PmemPool("/dev/pmem",
                                     MemoryHeapBase::READ_ONLY,
                                     mCameraControlFd,
                                     MSM_PMEM_RAW_MAINIMG,
