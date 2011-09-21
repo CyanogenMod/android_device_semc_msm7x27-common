@@ -1,34 +1,8 @@
 on early-boot
+    #pre hw config
+    exec /sbin/sh /pre_hw_config.sh
     #boot into recovery
     exec /sbin/bootrec
-
-on early-init
-    # Add qualcomm devices
-    device /dev/hw3d 0660 system graphics
-    device /dev/kgsl 0666 system graphics
-    device /dev/msm_rotator 0660 system graphics
-    device /dev/pmem_gpu* 0666 system graphics
-    device /dev/msm_pcm_dec* 0666 system audio
-    device /dev/snd/controlC0* 0666 system audio
-    device /dev/msm_aac* 0660 system audio
-    device /dev/amrnb* 0660 system audio
-    device /dev/amrwb* 0660 system audio
-    device /dev/msm_qcelp* 0660 system audio
-    device /dev/evrc* 0660 system audion
-    device /dev/msm_voicememo* 0660 system audio
-    mkdir /dev/socket/sensors 0777 system system
-    #radio Fix
-    chown radio system /dev/oncrpc/30000016:d6bb93e6
-    chown radio system /dev/oncrpc/30000000:fd767954
-    chown radio system /dev/oncrpc/30000019:821a1945
-    chown radio system /dev/oncrpc/3000003c:beb78360
-    chown radio system /dev/oncrpc/30000003:d03123cc
-    chown radio system /dev/oncrpc/3000000e:00040000
-    chown radio system /dev/oncrpc/30000012:00010000
-
-on property:init.svc.bluetoothd=running
-    write /sys/devices/virtual/bluetooth/hci0/link_supervision_timeout 6400
-    write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
 
 on boot
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
@@ -46,7 +20,7 @@ on boot
     #chown system system /sys/devices/platform/msm_hsusb_periphera/composition
     # USB Gadget framework
     chown system system /sys/devices/platform/android_usb/composition
-    
+
     #WIFI
     mkdir /data/misc/wifi 0770 wifi wifi
     mkdir /data/misc/wifi/sockets 0770 wifi wifi
@@ -56,7 +30,7 @@ on boot
     chmod 0660 /data/misc/wifi/wpa_supplicant.conf
     chown wifi wifi /data/misc/wifi
     chmod 0771 /data/misc/wifi
-    
+
     chown system system /sys/class/power_supply/battery/disable_charging
     chown system system /sys/devices/platform/i2c-adapter/i2c-0/0-0036/br::suspend
     chown system system /sys/devices/platform/i2c-adapter/i2c-0/0-0036/mode
@@ -95,6 +69,7 @@ on boot
 
 # needed for sensors HAL:
     mkdir /etc/sensors 0777
+    mkdir /dev/socket/sensors 0777 system system
 
 # nvimport FIX
     mkdir /data/etc/ 0775
@@ -102,6 +77,10 @@ on boot
 
 # Use interrupt to detect sd card insertion and removal
     write /sys/bus/platform/drivers/msm_sdcc/msm_sdcc.1/polling 0
+
+on property:init.svc.bluetoothd=running
+    write /sys/devices/virtual/bluetooth/hci0/link_supervision_timeout 6400
+    write /sys/devices/virtual/bluetooth/hci0/idle_timeout 7000
 
 # Enabled port-bridge for 'eng' builds
 service qmuxd /system/bin/qmuxd &
@@ -156,12 +135,6 @@ service dhcpcd /system/bin/dhcpcd -BKL -d tiwlan0
     disabled
     oneshot
 
-# Needed for AKM8973 support
-on early-init
-    device /dev/akm8975_aot 0660 compass system
-    device /dev/akm8975_dev 0660 compass system
-
-
 # Needed for touch support
 service inputattach /system/bin/inputattach -cypress /dev/ttyHS1
 
@@ -185,3 +158,4 @@ service hostapd /system/bin/hostap /data/misc/wifi/hostapd.conf
 service nvimport /system/bin/nvimport
     user root
     oneshot
+

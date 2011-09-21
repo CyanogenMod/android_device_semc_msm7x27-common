@@ -22,7 +22,7 @@
 PRODUCT_SPECIFIC_DEFINES += TARGET_PRELINKER_MAP=$(TOP)/device/semc/msm7x27-common/prelink-linux-arm-x8.map
 
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/ueventd.delta.rc:root/ueventd.delta.rc \
+    device/semc/msm7x27-common/prebuilt/pre_hw_config.sh:root/pre_hw_config.sh \
     device/semc/msm7x27-common/prebuilt/init.delta.rc:root/init.delta.rc \
     device/semc/msm7x27-common/recovery.fstab:root/recovery.fstab \
     device/semc/msm7x27-common/prebuilt/vold.fstab:system/etc/vold.fstab \

@@ -44,10 +44,15 @@ BOARD_VENDOR_QCOM_AMSS_VERSION := 1240
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := delta
 BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
 
-BOARD_EGL_CFG := device/semc/msm7x27-common/prebuilt/egl.cfg
 BOARD_NO_RGBX_8888 := true
 TARGET_USES_16BPPSURFACE_FOR_OPAQUE := true
 TARGET_LIBAGL_USE_GRALLOC_COPYBITS := true
+BOARD_AVOID_DRAW_TEXTURE_EXTENSION := true
+BOARD_EGL_CFG := device/semc/msm7x27-common/prebuilt/egl.cfg
+
+WITH_JIT := true
+ENABLE_JSC_JIT := true
+JS_ENGINE := v8
 
 TARGET_USES_OLD_LIBSENSORS_HAL:=true
 
@@ -75,6 +80,6 @@ BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/msm7x27-common/releasetools/semc_ota_from_target_files
 
 # Vibrator
-BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/semc/msm7x27-common/vibrator.c
+#BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/semc/msm7x27-common/vibrator.c
 
 WITH_DEXPREOPT := true

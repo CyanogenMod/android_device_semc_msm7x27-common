@@ -157,6 +157,7 @@ board_property boardProperties[] = {
 };
 
 static const camera_size_type picture_sizes[] = {
+// disabled untill we fix them !!
     { 2592, 1944 }, // 5MP
     { 2048, 1536 }, // 3MP
     { 1632, 1224 }, // 2MP 
@@ -1196,6 +1197,11 @@ bool QualcommCameraHardware::initRaw(bool initJpegHeap)
     // orig_picture_dx, and orig_picture_dy after this function call. We need to
     // keep it for jpeg_encoder_encode.
     bool ret = native_set_parm(CAMERA_SET_PARM_DIMENSION, sizeof(cam_ctrl_dimension_t), &mDimension);
+
+    LOGE("NEW UI Thumbnail Size Width %d Height %d", mDimension.ui_thumbnail_width, mDimension.ui_thumbnail_height);
+    LOGE("NEW Thumbnail Size Width %d Height %d", mDimension.thumbnail_width, mDimension.thumbnail_height);
+    LOGE("NEW ORIG_PICTURE_DX Width %d Height %d", mDimension.orig_picture_dx, mDimension.orig_picture_dy);
+
     if(!ret) {
         LOGE("initRaw X: failed to set dimension");
         return false;
@@ -1210,7 +1216,7 @@ bool QualcommCameraHardware::initRaw(bool initJpegHeap)
     mRawSize = rawWidth * rawHeight * 3 / 2;
     mJpegMaxSize = rawWidth * rawHeight * 3 / 2;
 
-    LOGV("initRaw: initializing mRawHeap.");
+    LOGV("initRaw: initializing mRawHeap. mRawSize:%d , mJpegMaxSize:%d",mRawSize,mJpegMaxSize);
     mRawHeap =
         new PmemPool("/dev/pmem",
                      MemoryHeapBase::READ_ONLY,
