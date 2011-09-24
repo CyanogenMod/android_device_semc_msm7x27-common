@@ -56,8 +56,9 @@ JS_ENGINE := v8
 
 TARGET_USES_OLD_LIBSENSORS_HAL:=true
 
-BOARD_USE_USB_MASS_STORAGE_SWITCH := true
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun0/file
+#BOARD_USE_USB_MASS_STORAGE_SWITCH := true
+#TARGET_USE_CUSTOM_LUN_FILE_PATH := /sys/devices/platform/msm_hsusb/gadget/lun0/file
+#BOARD_UMS_LUNFILE := /sys/devices/platform/msm_hsusb/gadget/lun0/file
 
 BOARD_CUSTOM_BOOTIMG_MK := device/semc/msm7x27-common/custombootimg.mk
 TARGET_RECOVERY_PRE_COMMAND := "touch /cache/recovery/boot;sync;"
@@ -67,7 +68,6 @@ BOARD_HAS_NO_MISC_PARTITION := true
 BOARD_USES_RECOVERY_CHARGEMODE := false
 BOARD_LDPI_RECOVERY := true
 BOARD_HAS_JANKY_BACKBUFFER := true
-BOARD_UMS_LUNFILE := /sys/devices/platform/msm_hsusb/gadget/lun0/file
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/semc/msm7x27-common/recovery/recovery_ui.c
 
 
@@ -79,7 +79,5 @@ BOARD_SDCARD_INTERNAL_DEVICE := /dev/block/mmcblk0p1
 # A custom ota package maker for a device without a boot partition
 TARGET_RELEASETOOL_OTA_FROM_TARGET_SCRIPT := device/semc/msm7x27-common/releasetools/semc_ota_from_target_files
 
-# Vibrator
-#BOARD_HAS_VIBRATOR_IMPLEMENTATION := ../../device/semc/msm7x27-common/vibrator.c
 
 WITH_DEXPREOPT := true
