@@ -412,6 +412,10 @@ def WriteFullOTAPackage(input_zip, output_zip):
     common.CheckSize(boot_img.data, "boot.img", OPTIONS.info_dict)
     common.ZipWriteStr(output_zip, "boot.img", boot_img.data)
 
+  kernel_sin = open(OPTIONS.device_out + '/kernel.sin','r')
+  common.ZipWriteStr(output_zip, "kernel.sin", kernel_sin.read())
+  kernel_sin.close()
+
   script.ShowProgress(0.2, 0)
 
   if OPTIONS.backuptool:
@@ -769,7 +773,7 @@ def main(argv):
 
   print "unzipping target target-files..."
   OPTIONS.input_tmp = common.UnzipTemp(args[0])
-
+  OPTIONS.device_out = os.path.dirname(args[1])
   OPTIONS.target_tmp = OPTIONS.input_tmp
   input_zip = zipfile.ZipFile(args[0], "r")
   OPTIONS.info_dict = common.LoadInfoDict(input_zip)
