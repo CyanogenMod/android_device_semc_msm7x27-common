@@ -158,10 +158,10 @@ board_property boardProperties[] = {
 
 static const camera_size_type picture_sizes[] = {
 // disabled untill we fix them !!
-    { 2592, 1944 }, // 5MP
-    { 2048, 1536 }, // 3MP
-    { 1632, 1224 }, // 2MP 
-    { 1280, 960 }, // 1MP
+//    { 2592, 1944 }, // 5MP
+//    { 2048, 1536 }, // 3MP
+//    { 1632, 1224 }, // 2MP 
+//    { 1280, 960 }, // 1MP
     { 640, 480 }, // VGA
 };
 static int PICTURE_SIZE_COUNT = sizeof(picture_sizes)/sizeof(camera_size_type);
