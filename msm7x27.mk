@@ -103,8 +103,8 @@ PRODUCT_PACKAGES += \
     gps.delta \
     libOmxCore \
     libmm-omxcore \
-    com.android.future.usb.accessory
-
+    com.android.future.usb.accessory \
+    rzscontrol
 
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
