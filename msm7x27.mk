@@ -26,6 +26,7 @@ PRODUCT_COPY_FILES += \
     device/semc/msm7x27-common/prebuilt/init.delta.rc:root/init.delta.rc \
     device/semc/msm7x27-common/recovery.fstab:root/recovery.fstab \
     device/semc/msm7x27-common/prebuilt/vold.fstab:system/etc/vold.fstab \
+    device/semc/msm7x27-common/prebuilt/media_profiles.xml:system/etc/media_profiles.xml \
     device/semc/msm7x27-common/prebuilt/hw_config.sh:system/etc/hw_config.sh
 
 PRODUCT_COPY_FILES += \
