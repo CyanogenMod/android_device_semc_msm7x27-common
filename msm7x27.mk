@@ -130,6 +130,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
     ro.opengles.version=131072  \
     ro.compcache.default=0 \
+    ro.tethering.kb_disconnect=1 \
     ro.product.locale.language=en \
     ro.product.locale.region=US \
     wifi.hotspot.ti=1 \
