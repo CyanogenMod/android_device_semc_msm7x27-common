@@ -72,8 +72,6 @@ PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
     frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml
 
-
-
 #HOTSPOT
 PRODUCT_COPY_FILES += \
     device/semc/msm7x27-common/prebuilt/10cpmodules:system/etc/init.d/10cpmodules \
@@ -84,10 +82,7 @@ PRODUCT_COPY_FILES += \
     device/semc/msm7x27-common/prebuilt/10dnsconf:system/etc/init.d/10dnsconf \
     device/semc/msm7x27-common/prebuilt/10hostapconf:system/etc/init.d/10hostapconf \
     device/semc/msm7x27-common/prebuilt/hostapd.conf:system/etc/wifi/softap/hostapd.conf \
-    device/semc/msm7x27-common/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf \
-    device/semc/msm7x27-common/prebuilt/tiwlan_firmware.bin:system/etc/wifi/tiwlan_firmware.bin \
-    device/semc/msm7x27-common/prebuilt/tiwlan_firmware_ap.bin:system/etc/wifi/softap/tiwlan_firmware_ap.bin
-
+    device/semc/msm7x27-common/prebuilt/dnsmasq.conf:system/etc/wifi/dnsmasq.conf
 
 #crappy headset
 PRODUCT_COPY_FILES += \
