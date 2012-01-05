@@ -319,7 +319,6 @@ status_t AudioHardware::setMicMute(bool state)
 status_t AudioHardware::setMicMute_nosync(bool state)
 {
     if (mMicMute != state) {
-    if (mMicMute != state) {
         mMicMute = state;
         return doAudioRouteOrMute(SND_DEVICE_CURRENT);
     }
