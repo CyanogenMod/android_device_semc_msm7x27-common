@@ -22,3 +22,15 @@
 /dev/oncrpc/30000016:*   0660 radio  radio
 /dev/oncrpc/30000019:*   0660 radio  radio
 /dev/oncrpc/3000003c:*   0660 radio  radio
+
+# Sony Xperia X8 specific
+/dev/msm_amr*             0660   system     audio
+/dev/msm_evrc             0660   system     audio
+/dev/msm_pcm_dec          0660   system     audio
+/dev/msm_preproc_ctl      0660   system     audio
+/dev/msm_qcelp            0660   system     audio
+/dev/msm_voicememo        0660   system     audio
+/dev/msm_wma*             0660   system     audio
+
+
+/dev/video20              0660   system     camera
